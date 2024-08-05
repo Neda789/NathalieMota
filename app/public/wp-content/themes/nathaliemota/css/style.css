@@ -1,0 +1,166 @@
+@charset "UTF-8";
+/*
+Theme Name: nathaliemota
+Description: site de phptographies d'évènements
+Author: Isabelle_07 
+Author URI: http://nathaliemota.local/
+Version:1.0
+Requires at least:  5.0
+Requires PHP:       7.2
+*/
+.photoContainer {
+  width: 100%;
+  height: 962px;
+  object-fit: cover;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.title1 {
+  font-family: "Space Mono", monospace;
+  font-size: 96px;
+  text-transform: uppercase;
+  font-style: italic;
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 2px #fff;
+  margin: auto;
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  top: 45%;
+  margin-left: 200px;
+}
+
+.catalogue-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.catalogue_photos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 25px;
+  position: relative;
+  margin: auto;
+}
+
+.selection {
+  gap: 20px;
+  display: flex;
+  flex-wrap: nowrap;
+  margin-left: 90px;
+  margin-top: 20px;
+  justify-content: space-between;
+}
+
+.filter {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-family: "poppins";
+  font-size: 14px;
+  background-color: white;
+  color: #333;
+  margin: 10px 0;
+  width: 260px;
+  height: 45px;
+}
+
+.taxo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#format {
+  margin-left: 60px;
+  font-family: "poppins";
+}
+
+#orderby {
+  margin-right: 87px;
+  font-family: "poppins";
+}
+
+#load-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #d8d8d8;
+  color: black;
+  border: none;
+  width: 272px;
+  height: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 580px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+/*HEDAER*/
+.header {
+  position: relative;
+  width: 100%;
+  height: 80px;
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
+}
+
+.navform {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  gap: 4em;
+  font-size: 16px;
+  margin-top: 30px;
+  margin-right: 100px;
+}
+
+.menu-item {
+  display: flex;
+}
+
+.menu-item a {
+  color: #000000;
+  text-decoration: none !important;
+  font-family: "Space Mono", monospace;
+  font-size: 16px;
+}
+
+.logo {
+  width: 216px;
+  height: 14px;
+  padding-top: 30px;
+  margin-left: 100px;
+}
+
+/*GENERAL*/
+.customize-support {
+  width: 100%;
+  min-height: 100vh;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+main {
+  min-height: 70vh;
+}
+
+.novisible {
+  display: none;
+}
+
+/*# sourceMappingURL=style.css.map */
