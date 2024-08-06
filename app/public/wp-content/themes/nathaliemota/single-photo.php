@@ -90,7 +90,7 @@ get_header(); ?>
             <?php
             $args = array(
                 'post_type' => 'photo',
-                'posts_per_page' => 2,
+                'posts_per_page' => 8,
                 'orderby' => 'rand',
                 'tax_query' => array(
                     array(
@@ -105,7 +105,7 @@ get_header(); ?>
 
             if ($query->have_posts()) :
                 while ($query->have_posts()) : $query->the_post();
-                    get_template_part('templates/phots');
+                    get_template_part('templates/photos');
                 endwhile;
             endif;
             ?>

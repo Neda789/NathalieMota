@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NathalieMota</title>
-    <?php wp_head(); ?>
-</head>
-
-<body <?php body_class(); ?>>
-    <header>
-        <?php get_header(); ?>
-    </header>
+<?php get_header(); ?>
+    
 
     <main>
         <article>
@@ -88,7 +77,7 @@
             </div>
 
             <div class="catalogue-container">
-                <div class="catalogue_photos">
+                <div id="catalogue_photos">
                     <?php
                     $args = array(
                         'post_type' => 'photo',
@@ -109,15 +98,57 @@
                 </div>
             </div>
 
-            <button id="load-more" data-page="1" data-url="<?php echo admin_url('admin-ajax.php'); ?>">Charger plus</button>           
-
+            <button id="load-more" data-page="1">Charger plus</button>           
 
         </article>
     </main>
 
     <?php get_footer(); ?>
     
+    <script>
+        jQuery(document).ready(function($) {
+            var ajaxUrl = "<?php echo admin_url('admin-ajax.php'); ?>";
+            var page = 1;
+
+            $('#load-more').on('click', function() {
+                page++;
+                var data = {
+                    'action': 'load_more_photos',
+                    'page': page
+                };
+
+                $.ajax({
+                    url: ajaxUrl,
+                    type: 'POST',
+                    data: data,
+                    success: function(response) {
+                        $('#catalogue_photos').append(response);
+                    }
+                });
+            });
+
+            $('.filter').on('change', function() {
+                var category = $('#categorie').val();
+                var format = $('#format').val();
+                var orderby = $('#orderby').val();
+
+                var data = {
+                    'action': 'filter_photos',
+                    'category': category,
+                    'format': format,
+                    'orderby': orderby
+                };
+
+                $.ajax({
+                    url: ajaxUrl,
+                    type: 'POST',
+                    data: data,
+                    success: function(response) {
+                        $('#catalogue_photos').html(response);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
-
-   
