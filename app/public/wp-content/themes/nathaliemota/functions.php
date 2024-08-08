@@ -23,6 +23,7 @@ add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 function theme_enqueue_styles() {
     wp_enqueue_style( 'nathaliemota-style', get_stylesheet_directory_uri() . '/css/style.css'); 
     wp_enqueue_script( 'nathaliemota-script', get_template_directory_uri() . '/js/script.js', array( 'jquery' ), null, true);
+    wp_enqueue_script( 'modal-script', get_template_directory_uri() . '/js/modal.js', array( 'jquery' ), null, true);
 }
 function nathaliemota_load_filter() {
     // Vérification de sécurité
@@ -116,6 +117,5 @@ function load_more_photos() {
 }
 add_action('wp_ajax_load_more_photos', 'load_more_photos');
 add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
-
 
 

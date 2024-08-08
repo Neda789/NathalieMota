@@ -98,7 +98,7 @@
                 </div>
             </div>
 
-            <button id="load-more" data-page="1">Charger plus</button>           
+            <button id="load-more" data-page="One">Charger plus</button>           
 
         </article>
     </main>

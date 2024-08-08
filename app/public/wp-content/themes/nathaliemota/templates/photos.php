@@ -5,7 +5,7 @@
                 <div class="overlay-content">
                 <button class="eyeIcon"> <img src="<?php echo get_theme_file_uri() . '/assets/img/eye.png'; ?>" alt="oeil"></button>
                     <img class="fullscreen" src="<?php echo get_theme_file_uri() . '/assets/img/fullscreen.png'; ?>" alt="">
-                    <span class="ref">Référence: <?php $value = get_field("reference_photo");
+                    <span class="ref">Référence: <?php $value = get_field("reference");
                           if ($value) {
                             echo wp_kses_post($value);
                           } else {

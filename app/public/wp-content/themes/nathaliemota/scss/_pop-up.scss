@@ -1,22 +1,62 @@
-.popup-overlay {
-    display: none; /* Start hidden */
+.popup {
     position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: #00000060;
+    display: none;
     justify-content: center;
     align-items: center;
-  }
-  .popup-open .popup-overlay {
-    display: flex; /* Show when popup-open class is added to body */
-  }
-  .popup {
+    top: 10px;   
+    left:0;
+    z-index:10020;
+        }
+
+.popup-background {
+    position: relative;
     background: white;
-    padding: 20px;
-    border-radius: 5px;
-  }
-  .popup-close {
+    padding: 30px;
+    animation:fade-in-up 0.7s;
+}
+
+.popup-btn, .popup-background .wpcf7-submit {
+    display: inline-block;
+    background-color: #d8d8d8;
+    font-family:'Poppins'!important;
+    font-size:12px!important;
+    line-height: 20px;
+    padding: 6px 16px;
+    color: black;
+    border-radius: 6px;
+    transition: all 0.4s ease;
+}
+
+.popup-close {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    border-radius: 20px;
+    height: 20px;
+    width: 20px;
+    border: 1px solid black;
+    background: white;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.4s ease;
+}
+
+.popup-close:hover {
+    transform: rotate(180deg);
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }    to {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
+
