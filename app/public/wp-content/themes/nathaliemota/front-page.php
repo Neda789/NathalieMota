@@ -67,7 +67,7 @@
                 <div class="order-by">
                     <select class="filter" id="orderby">
                         <option value="">TRIER PAR</option>
-                        <?php foreach ($trierparsList as $value => $label) : ?>
+                        <?php foreach ($trierpar as $value => $label) : ?>
                             <option value="<?php echo esc_attr($value); ?>">
                                 <?php echo esc_html($label); ?>
                             </option>

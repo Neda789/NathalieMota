@@ -25,78 +25,38 @@ function theme_enqueue_styles() {
     wp_enqueue_script( 'nathaliemota-script', get_template_directory_uri() . '/js/script.js', array( 'jquery' ), null, true);
     wp_enqueue_script( 'modal-script', get_template_directory_uri() . '/js/modal.js', array( 'jquery' ), null, true);
 }
-function nathaliemota_load_filter() {
-    // Vérification de sécurité
-    if (
-        ! isset($_REQUEST['nonce']) ||
-        ! wp_verify_nonce($_REQUEST['nonce'], 'nathaliemota_nonce')
-    ) {
-        wp_send_json_error("Vous n’avez pas l’autorisation d’effectuer cette action.", 403);
-    }
-
-    $categorie_photo = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : '';
-    $format_photo = isset($_POST['format']) ? sanitize_text_field($_POST['format']) : '';
-    $orderby = isset($_POST['orderby']) ? sanitize_text_field($_POST['orderby']) : '';
-
-    $args = [
-        'post_type' => 'photo',
-        'posts_per_page' => 8,
-    ];
-
-    if ($categorie_photo) {
-        $args['tax_query'][] = [
-            'taxonomy' => 'categorie_photo',
-            'field' => 'slug',
-            'terms' => $categorie_photo,
-        ];
-    }
-
-    if ($format_photo) {
-        $args['tax_query'][] = [
-            'taxonomy' => 'format_photo',
-            'field' => 'slug',
-            'terms' => $format_photo,
-        ];
-    }
-
-    if ($orderby) {
-        $args['order'] = $orderby === 'asc' ? 'ASC' : 'DESC';
-        $args['orderby'] = 'meta_value_num';
-        $args['meta_key'] = 'annee_photo';
-    }
-
-    $ajaxposts = new WP_Query($args);
-    $response = '';
-
-    if ($ajaxposts->have_posts()) {
-        while ($ajaxposts->have_posts()) {
-            $ajaxposts->the_post();
-            ob_start();
-            get_template_part('templates/photo');
-            $response .= ob_get_clean();
-        }
-    } else {
-        $response = 'Photos non trouvées';
-    }
-
-    echo $response;
-    wp_die();
-}
-add_action('wp_ajax_nathaliemota_load_filter', 'nathaliemota_load_filter');
-add_action('wp_ajax_nopriv_nathaliemota_load_filter', 'nathaliemota_load_filter');
-
-
-/****BOUTON LOAD MORE*****/
 function load_more_photos() {
     // Vérification de la variable page
     $paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
-    error_log('Loading page: ' . $paged); // Ajout d'un log pour le debug
+
+    // Récupération des filtres
+    $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : '';
+    $format = isset($_POST['format']) ? sanitize_text_field($_POST['format']) : '';
+    $orderby = isset($_POST['orderby']) ? sanitize_text_field($_POST['orderby']) : 'desc';
 
     $args = array(
         'post_type' => 'photo',
         'posts_per_page' => 8,
         'paged' => $paged,
+        'order' => strtoupper($orderby),
     );
+
+    // Ajout des filtres de taxonomie si disponibles
+    if ($category) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'categorie_photo',
+            'field'    => 'slug',
+            'terms'    => $category,
+        );
+    }
+
+    if ($format) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'format',
+            'field'    => 'slug',
+            'terms'    => $format,
+        );
+    }
 
     $query = new WP_Query($args);
     $response = '';
@@ -115,7 +75,14 @@ function load_more_photos() {
     echo $response;
     exit;
 }
+
+// Enregistrement des actions AJAX pour les utilisateurs connectés et non connectés
 add_action('wp_ajax_load_more_photos', 'load_more_photos');
 add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
+
+// Réutilisation de la même fonction pour filtrer les photos
+add_action('wp_ajax_filter_photos', 'load_more_photos');
+add_action('wp_ajax_nopriv_filter_photos', 'load_more_photos');
+
 
 

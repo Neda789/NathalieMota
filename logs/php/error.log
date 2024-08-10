@@ -283,3 +283,4 @@ Stack trace:
 [07-Aug-2024 09:03:37 UTC] PHP Warning:  Undefined variable $reference in C:\Users\Neda\Local Sites\nathalie-mota\app\public\wp-content\themes\nathaliemota\single-photo.php on line 53
 [07-Aug-2024 09:03:59 UTC] PHP Warning:  Undefined variable $reference in C:\Users\Neda\Local Sites\nathalie-mota\app\public\wp-content\themes\nathaliemota\single-photo.php on line 53
 [07-Aug-2024 09:10:02 UTC] PHP Warning:  Undefined variable $reference in C:\Users\Neda\Local Sites\nathalie-mota\app\public\wp-content\themes\nathaliemota\single-photo.php on line 56
+[10-Aug-2024 07:33:17 UTC] Loading page: 2
