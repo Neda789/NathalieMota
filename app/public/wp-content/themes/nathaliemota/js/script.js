@@ -110,78 +110,65 @@ jQuery(document).ready(function ($) {
     );
 });
 //***filters */
-
-    jQuery(document).ready(function($) {
-        var ajaxUrl = "<?php echo admin_url('admin-ajax.php'); ?>";
-        var page = 1;
-
-        $('#load-more').on('click', function() {
-            page++;
-            var data = {
-                'action': 'load_more_photos',
-                'page': page,
-                'category': $('#categorie').val(),
-                'format': $('#format').val(),
-                'orderby': $('#orderby').val()
-            };
-
-            $.ajax({
-                url: ajaxUrl,
-                type: 'POST',
-                data: data,
-                success: function(response) {
-                    $('#catalogue_photos').append(response);
-                }
-            });
-        });
-
-        $('.filter').on('change', function() {
-            page = 1; // Reset to page 1 when filters change
-            var data = {
-                'action': 'filter_photos',
-                'category': $('#categorie').val(),
-                'format': $('#format').val(),
-                'orderby': $('#orderby').val(),
-                'page': page
-            };
-
-            $.ajax({
-                url: ajaxUrl,
-                type: 'POST',
-                data: data,
-                success: function(response) {
-                    $('#catalogue_photos').html(response);
-                }
-            });
-        });
-    });
-
-//**lightbox */
 jQuery(document).ready(function($) {
-    // Append the lightbox HTML structure to the body
-    $('body').append(`
-        <div class="lightbox-overlay">
-            <span class="lightbox-close">&times;</span>
-            <div class="lightbox-content">
-                <img src="" alt="lightbox image">
-            </div>
-        </div>
-    `);
+    var ajaxUrl = "<?php echo admin_url('admin-ajax.php'); ?>";
 
-    // Open lightbox on image click
-    $('.lightbox-trigger').on('click', function() {
-        var imgSrc = $(this).attr('src');
-        $('.lightbox-content img').attr('src', imgSrc);
-        $('.lightbox-overlay').fadeIn(300); // Show lightbox with fade effect
-    });
+    // Filtrage
+    $('.filter').on('change', function() {
+        var category = $('#categorie').val();
+        var format = $('#format').val();
+        var orderby = $('#orderby').val();
 
-    // Close lightbox when clicking the close button or overlay
-    $('.lightbox-close, .lightbox-overlay').on('click', function() {
-        $('.lightbox-overlay').fadeOut(300); // Hide lightbox with fade effect
-    });
+        var data = {
+            'action': 'filter_photos',
+            'category': category,
+            'format': format,
+            'orderby': orderby
+        };
 
-    // Prevent lightbox from closing when clicking the image itself
-    $('.lightbox-content').on('click', function(e) {
-        e.stopPropagation();
+        $.ajax({
+            url: ajaxUrl,
+            type: 'POST',
+            data: data,
+            success: function(response) {
+                $('#catalogue_photos').html(response);
+            }
+        });
     });
 });
+//**lightbox */
+
+    jQuery(document).ready(function($) {
+        $('.fullscreen-icon').on('click', function(e) {
+            e.preventDefault();
+
+            var imgSrc = $(this).closest('.Photo-card').css('background-image');
+            imgSrc = imgSrc.replace(/^url\(['"](.+)['"]\)/, '$1'); // Extraction de l'URL de l'image
+
+            // Ajoute l'image à la lightbox
+            $('#lightbox-image').attr('src', imgSrc);
+            $('#lightbox').fadeIn();
+        });
+
+        // Fermer la lightbox
+        $('#lightbox-close').on('click', function() {
+            $('#lightbox').fadeOut();
+        });
+
+        // Fermer la lightbox en appuyant sur la touche "Échap"
+        $(document).on('keydown', function(e) {
+            if (e.key === "Escape") {
+                $('#lightbox').fadeOut();
+            }
+        });
+
+        // Navigation entre les images (si nécessaire)
+        $('#lightbox-prev').on('click', function() {
+            // Ajoutez ici la logique pour afficher l'image précédente
+        });
+
+        $('#lightbox-next').on('click', function() {
+            // Ajoutez ici la logique pour afficher l'image suivante
+        });
+    });
+

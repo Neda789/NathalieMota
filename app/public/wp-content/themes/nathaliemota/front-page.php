@@ -97,6 +97,7 @@
                     ?>
                 </div>
             </div>
+            
 
             <button id="load-more" data-page="One">Charger plus</button>           
 
