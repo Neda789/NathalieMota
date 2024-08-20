@@ -7,10 +7,12 @@
 	box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
 }
 
-.navform {
+.menu-header {
 	display: flex;
 	justify-content: space-between;
 	background-color: #ffff;
+	margin-top: 30px;
+	margin-bottom: 50px;
 }
 
 .navbar {
@@ -39,4 +41,7 @@
 	height: 14px;
 	padding-top: 30px;
 	margin-left: 100px;
+}
+.title-one{
+	display: none;
 }

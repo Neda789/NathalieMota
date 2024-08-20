@@ -17,7 +17,8 @@ Requires PHP:       7.2
   position: relative;
   overflow: hidden;
 }
-.photoContainer .title1 {
+
+.title-one {
   font-family: "Space Mono", monospace;
   font-size: 96px;
   text-transform: uppercase;
@@ -34,7 +35,7 @@ Requires PHP:       7.2
 }
 
 .catalogue-container {
-  display: block;
+  display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
@@ -62,7 +63,7 @@ Requires PHP:       7.2
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  font-family: "Poppins";
+  font-family: "poppins";
   font-size: 14px;
   background-color: white;
   color: #333;
@@ -76,13 +77,15 @@ Requires PHP:       7.2
   flex-direction: row;
   justify-content: space-between;
 }
-.taxo #format {
+
+#format {
   margin-left: 60px;
-  font-family: "Poppins";
+  font-family: "poppins";
 }
-.taxo #orderby {
+
+#orderby {
   margin-right: 87px;
-  font-family: "Poppins";
+  font-family: "poppins";
 }
 
 #load-more {
@@ -131,10 +134,12 @@ body {
   box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
 }
 
-.navform {
+.menu-header {
   display: flex;
   justify-content: space-between;
   background-color: white;
+  margin-top: 30px;
+  margin-bottom: 50px;
 }
 
 .navbar {
@@ -162,6 +167,10 @@ body {
   height: 14px;
   padding-top: 30px;
   margin-left: 100px;
+}
+
+.title-one {
+  display: none;
 }
 
 /*GENERAL*/
@@ -291,6 +300,11 @@ main {
   top: 10px;
   right: 10px;
   font-size: 14px;
+  width: 30px;
+  height: 30px;
+  border-radius: 35px;
+  background-color: black;
+  padding: 5px;
 }
 
 .photo {
@@ -305,7 +319,7 @@ main {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.495);
   opacity: 0;
   transition: opacity 0.3s;
   display: flex;
@@ -324,9 +338,11 @@ main {
   text-align: center;
 }
 
-.eye-icon {
-  font-size: 30px;
+.eye {
+  background: none;
   margin-bottom: 10px;
+  border: none;
+  font-size: 40px;
 }
 
 .lightbox {
@@ -420,6 +436,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 760px;
 }
 
 .middle-image {
@@ -427,8 +444,8 @@ main {
   max-height: 80%;
   margin: auto;
   display: block;
-  height: 900px;
-  width: 750px;
+  height: 600px;
+  width: 600px;
   object-fit: cover;
   background-size: cover;
   background-position: center;
@@ -442,7 +459,7 @@ main {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -473,8 +490,7 @@ main {
   justify-content: space-between;
   align-items: end;
 }
-
-.infos-photo {
+.post-infos .infos-photo {
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -484,8 +500,7 @@ main {
   box-sizing: border-box;
   border-bottom: solid 1px black;
 }
-
-.title {
+.post-infos .infos-photo .title {
   font-family: "Space Mono", monospace;
   font-style: italic;
   font-size: 66px;
@@ -493,8 +508,7 @@ main {
   margin-top: 10px;
   line-height: 55px;
 }
-
-.taxonomies {
+.post-infos .infos-photo .taxonomies {
   display: flex;
   flex-wrap: wrap;
   font-family: "Space Mono";
@@ -503,13 +517,11 @@ main {
   line-height: 4px;
   width: 200px;
 }
-
-.image-post {
+.post-infos .image-post {
   width: 564px;
   height: auto;
 }
-
-.contact-bloc {
+.post-infos .contact-bloc {
   display: flex;
   flex: 1;
   width: 50%;
@@ -520,8 +532,7 @@ main {
   justify-content: space-between;
   align-items: center;
 }
-
-#ctaContact {
+.post-infos .contact-bloc #ctaContact {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -544,8 +555,7 @@ main {
   justify-content: space-between;
   border-bottom: 1px solid #000;
 }
-
-.infos {
+.bloc-infos .infos {
   display: flex;
   width: 100%;
   flex-direction: row;
@@ -553,13 +563,11 @@ main {
   justify-content: space-between;
   align-items: center;
 }
-
-.p1 {
+.bloc-infos .infos .p1 {
   font-family: "Poppins";
   font-size: 18px;
 }
-
-.p2 {
+.bloc-infos .infos .p2 {
   font-family: "Space Mono";
   font-size: 21px;
   text-transform: uppercase;
@@ -567,33 +575,119 @@ main {
   margin-top: 30px;
 }
 
+/* Miniatures */
 .thumbnail_container {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-.current_thumbnail {
+.thumbnail_container .current_thumbnail {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
-.current_thumbnail img {
+.thumbnail_container .current_thumbnail img {
   max-width: 118px;
   max-height: 118px;
   margin-bottom: 10px;
 }
-
-/* Style pour les flèches de navigation */
-.navigation_arrows a {
+.thumbnail_container .navigation_arrows a {
   text-decoration: none;
   font-size: 1.5em;
   padding: 10px;
   color: black;
   cursor: pointer;
 }
-
-.navigation_arrows a:hover {
+.thumbnail_container .navigation_arrows a:hover {
   color: white;
+}
+
+/* Styles pour le bouton hamburger */
+.menu-toggle {
+  position: relative;
+  width: 30px;
+  height: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+  top: 0;
+  right: -300px;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 100%;
+  height: 4px;
+  background-color: #333;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* État actif du bouton (transformé en X) */
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Styles pour le menu mobile */
+.mobile-menu {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: red; /* Fond rouge */
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.mobile-menu.active {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.mobile-nav-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: start;
+  flex-direction: column;
+}
+
+.mobile-nav-menu li {
+  margin: 10px 0;
+}
+
+.mobile-nav-menu a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+@media screen and (max-width: 765px) {
+  .menu-toggle {
+    display: flex;
+    overflow: hidden;
+  }
+  .menu-header {
+    display: none;
+    overflow: hidden;
+  }
 }/*# sourceMappingURL=style.css.map */

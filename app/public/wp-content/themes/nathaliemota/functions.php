@@ -24,7 +24,13 @@ function theme_enqueue_styles() {
     wp_enqueue_style( 'nathaliemota-style', get_stylesheet_directory_uri() . '/css/style.css'); 
     wp_enqueue_script( 'nathaliemota-script', get_template_directory_uri() . '/js/script.js', array( 'jquery' ), null, true);
     wp_enqueue_script( 'modal-script', get_template_directory_uri() . '/js/modal.js', array( 'jquery' ), null, true);
+    wp_enqueue_script( 'lightbox-script', get_template_directory_uri() . '/js/lightbox.js', array( 'jquery' ), null, true);
+    wp_enqueue_script( 'filtres-script', get_template_directory_uri() . '/js/filtres.js', array( 'jquery' ), null, true);
+    wp_enqueue_script( 'loadmore-script', get_template_directory_uri()     . '/js/load-more.js', array( 'jquery' ), null, true);
 }
+
+
+//**Ajax */
 function load_more_photos() {
     // Vérification de la variable page
     $paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
@@ -35,15 +41,18 @@ function load_more_photos() {
     $orderby = isset($_POST['orderby']) ? sanitize_text_field($_POST['orderby']) : 'desc';
 
     $args = array(
-        'post_type' => 'photo',
+        'post_type'      => 'photo',
         'posts_per_page' => 8,
-        'paged' => $paged,
-        'order' => strtoupper($orderby),
+        'paged'          => $paged,
+        'order'          => strtoupper($orderby),
     );
+
+    // Initialiser le tableau 'tax_query' pour éviter les erreurs si aucun filtre n'est appliqué
+    $tax_query = array();
 
     // Ajout des filtres de taxonomie si disponibles
     if ($category) {
-        $args['tax_query'][] = array(
+        $tax_query[] = array(
             'taxonomy' => 'categorie_photo',
             'field'    => 'slug',
             'terms'    => $category,
@@ -51,11 +60,16 @@ function load_more_photos() {
     }
 
     if ($format) {
-        $args['tax_query'][] = array(
+        $tax_query[] = array(
             'taxonomy' => 'format',
             'field'    => 'slug',
             'terms'    => $format,
         );
+    }
+
+    // Si des filtres sont définis, les ajouter aux arguments de la requête
+    if (!empty($tax_query)) {
+        $args['tax_query'] = $tax_query;
     }
 
     $query = new WP_Query($args);
@@ -83,6 +97,4 @@ add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
 // Réutilisation de la même fonction pour filtrer les photos
 add_action('wp_ajax_filter_photos', 'load_more_photos');
 add_action('wp_ajax_nopriv_filter_photos', 'load_more_photos');
-
-
 
