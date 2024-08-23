@@ -18,7 +18,7 @@ Requires PHP:       7.2
   overflow: hidden;
 }
 
-.title1 {
+.title-one {
   font-family: "Space Mono", monospace;
   font-size: 96px;
   text-transform: uppercase;
@@ -134,10 +134,12 @@ body {
   box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
 }
 
-.navform {
+.menu-header {
   display: flex;
   justify-content: space-between;
   background-color: white;
+  margin-top: 30px;
+  margin-bottom: 50px;
 }
 
 .navbar {
@@ -298,8 +300,11 @@ main {
   top: 10px;
   right: 10px;
   font-size: 14px;
-  width: 15px;
-  height: 15px;
+  width: 30px;
+  height: 30px;
+  border-radius: 35px;
+  background-color: black;
+  padding: 5px;
 }
 
 .photo {
@@ -334,8 +339,10 @@ main {
 }
 
 .eye {
-  font-size: 30px;
+  background: none;
   margin-bottom: 10px;
+  border: none;
+  font-size: 40px;
 }
 
 .lightbox {
@@ -344,7 +351,7 @@ main {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 10000;
   overflow: auto;
   animation: lightboxIn 0.5s;
@@ -437,8 +444,8 @@ main {
   max-height: 80%;
   margin: auto;
   display: block;
-  height: 760px;
-  width: 500px;
+  height: 600px;
+  width: 600px;
   object-fit: cover;
   background-size: cover;
   background-position: center;
@@ -452,7 +459,7 @@ main {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.805);
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -593,4 +600,89 @@ main {
 }
 .thumbnail_container .navigation_arrows a:hover {
   color: white;
+}
+
+/* Styles pour le bouton hamburger */
+.menu-toggle {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background: none;
+  border: none;
+  top: 0;
+  right: 20px;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 100%;
+  height: 4px;
+  background-color: #333;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* État actif du bouton (transformé en X) */
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Styles pour le menu mobile */
+.mobile-menu {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: red; /* Fond rouge */
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.mobile-menu.active {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.mobile-nav-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: start;
+  flex-direction: column;
+}
+
+.mobile-nav-menu li {
+  margin: 10px 0;
+}
+
+.mobile-nav-menu a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+@media screen and (max-width: 765px) {
+  .menu-toggle {
+    display: flex;
+    overflow: hidden;
+  }
+  .menu-header {
+    display: none;
+    overflow: hidden;
+  }
 }/*# sourceMappingURL=style.css.map */

@@ -1,27 +1,59 @@
-//***Filters */
 jQuery(document).ready(function($) {
-    var ajaxUrl = "<?php echo admin_url('admin-ajax.php'); ?>";
+    function setupFilterToggle(filterId) {
+        var $filter = $('#' + filterId);
+        var $selectedOption = $filter.find('.selected-option');
+        var $options = $filter.find('.options');
+        var $arrow = $filter.find('.arrow');
 
-    // Filtrage
-    $('.filter').on('change', function() {
-        var category = $('#categorie').val();
-        var format = $('#format').val();
-        var orderby = $('#orderby').val();
+        $selectedOption.on('click', function() {
+            $options.toggleClass('show');
+            $arrow.toggleClass('open');
+        });
 
-        var data = {
-            'action': 'filter_photos',
-            'category': category,
-            'format': format,
-            'orderby': orderby
-        };
+        $options.find('.option').on('click', function() {
+            var value = $(this).data('value');
+            var text = $(this).text();
+            $selectedOption.text(text + ' ');
+            $arrow.removeClass('open');
+            $options.removeClass('show');
 
-        $.ajax({
-            url: ajaxUrl,
-            type: 'POST',
-            data: data,
-            success: function(response) {
-                $('#catalogue_photos').html(response);
+            // Filtrer les photos
+            filterPhotos();
+        });
+    }
+
+    function filterPhotos() {
+        // Récupérer les valeurs sélectionnées pour chaque filtre
+        const selectedCategories = Array.from($('#categorie-filter .option.selected')).map(option => option.dataset.value);
+        const selectedFormats = Array.from($('#format-filter .option.selected')).map(option => option.dataset.value);
+
+        $('.photo').each(function() {
+            const $photo = $(this);
+            const photoCategories = $photo.attr('class').split(' ').filter(cls => cls.startsWith('cat-'));
+            const photoFormats = $photo.attr('class').split(' ').filter(cls => cls.startsWith('format-'));
+
+            const hasCategory = selectedCategories.length === 0 || selectedCategories.some(category => photoCategories.includes(`cat-${category}`));
+            const hasFormat = selectedFormats.length === 0 || selectedFormats.some(format => photoFormats.includes(`format-${format}`));
+
+            if (hasCategory && hasFormat) {
+                $photo.show();
+            } else {
+                $photo.hide();
             }
         });
+    }
+
+    // Initialiser les filtres
+    setupFilterToggle('categorie-filter');
+    setupFilterToggle('format-filter');
+    setupFilterToggle('orderby-filter');
+
+    // Événement de sélection de filtre
+    $('.custom-dropdown').on('click', '.option', function() {
+        $(this).toggleClass('selected');
+        filterPhotos();
     });
+
+    // Initialiser le filtrage
+    filterPhotos();
 });

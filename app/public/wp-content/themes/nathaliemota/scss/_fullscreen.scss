@@ -20,75 +20,74 @@
     background-size: cover;
     background-position: center;
     position: relative;
-    overflow: hidden;
-}
-
-.ref{
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    font-family: 'poppins';
-    text-transform: uppercase;
-    font-size: 14px;
-}
-
-.cat{
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    font-family: 'poppins';
-    text-transform: uppercase;
-    font-size: 14px;
-}
-
-.fullscreen{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 14px;  
-    width: 30px;
-    height: 30px;
-    border-radius: 35px;
-    background-color: black;
-    padding: 5px;
+    overflow: hidden
 }
 
 .photo {
     position: relative;
     display: inline-block;
     margin: 10px;
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.495);
+        opacity: 0;
+        transition: opacity 0.3s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: white;
+        z-index: 10;
+
+        .overlay-content {
+            text-align: center;
+
+            .eye {
+                background: none;
+                margin-bottom: 10px;
+                border: none;
+                font-size: 40px;
+            }
+        }
+    }
+
+    &:hover .overlay {
+        opacity: 1;
+    }
 }
 
-.overlay {
+.ref {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.495); 
-    opacity: 0;
-    transition: opacity 0.3s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    color: white;
-    z-index: 10; 
+    bottom: 10px;
+    left: 10px;
+    font-family: 'Poppins';
+    text-transform: uppercase;
+    font-size: 14px;
 }
 
-.photo:hover .overlay {
-    opacity: 1;
+.cat {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-family: 'Poppins';
+    text-transform: uppercase;
+    font-size: 14px;
 }
 
-.overlay-content {
-    text-align: center;
-}
-
-.eye {
-    background: none;
-    margin-bottom: 10px;
-    border: none;
-    font-size: 40px;
-    
+.fullscreen {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 14px;
+    width: 30px;
+    height: 30px;
+    border-radius: 35px;
+    background-color: black;
+    padding: 5px;
 }
 

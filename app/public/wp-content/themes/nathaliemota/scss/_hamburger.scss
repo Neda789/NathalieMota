@@ -1,95 +1,78 @@
 /* Styles pour le bouton hamburger */
 .menu-toggle {
-    position: relative;
-    width: 30px;
-    height: 22px;
-    display: flex;
+    position: absolute;
+    display: none;
     flex-direction: column;
-    justify-content: space-between;
     background: none;
     border: none;
-    cursor: pointer;
-    z-index: 1001;
     top: 0;
-    right: -300px;
-    
+    right: 20px;
 
+    span {
+        display: block;
+        width: 100%;
+        height: 4px;
+        background-color: #333;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    &.active {
+        span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+    }
 }
 
-.menu-toggle span {
-    display: block;
-    width: 100%;
-    height: 4px;
-    background-color: #333;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-/* État actif du bouton (transformé en X) */
-.menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-
-.menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
-}
-
-/* Styles pour le menu mobile */
 .mobile-menu {
-    display: flex;
+    display: none;
     position: fixed;
-    
     width: 100%;
     height: 100vh;
     background-color: red; /* Fond rouge */
-    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 1000;
+
+    &.active {
+        display: flex;
+    }
+
+    .mobile-nav-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: start;
+        flex-direction: column;
+
+        li {
+            margin: 10px 0;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 24px;
+        }
+    }
 }
 
-.mobile-menu.active {
-    display: flex;
-    height: 100vh;
-    width: 100%;
+@media screen and (max-width: 765px) {
+    .menu-toggle {
+        display: flex;
+        overflow: hidden;
+    }
     
-}
-
-.mobile-nav-menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    text-align: start;
-    flex-direction: column;
-}
-
-.mobile-nav-menu li {
-    margin: 10px 0;
-   
-}
-
-
-.mobile-nav-menu a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 24px;
-}
-.menu-toggle{
-    display: none;
-}
-@media screen and (max-width: 765px)
-{
-  .menu-toggle{
-    display: flex;
-    overflow: hidden;
-  }  
-  .menu-header{
-    display: none;
-    overflow: hidden;
-  }
-
+    .menu-header {
+        display: none;
+        overflow: hidden;
+    }
 }

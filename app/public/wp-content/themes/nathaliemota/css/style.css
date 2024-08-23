@@ -17,8 +17,7 @@ Requires PHP:       7.2
   position: relative;
   overflow: hidden;
 }
-
-.title-one {
+.photoContainer .title-one img {
   font-family: "Space Mono", monospace;
   font-size: 96px;
   text-transform: uppercase;
@@ -40,8 +39,7 @@ Requires PHP:       7.2
   align-items: center;
   padding: 20px;
 }
-
-.catalogue_photos {
+.catalogue-container .catalogue_photos {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -50,42 +48,84 @@ Requires PHP:       7.2
   margin: auto;
 }
 
-.selection {
-  gap: 20px;
+/* Dropdown Styles */
+.custom-dropdown .options {
+  display: none;
+}
+
+.custom-dropdown .options.show {
+  display: block;
+}
+
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+}
+.custom-dropdown .selected-option {
+  background: #f5f5f5;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+.custom-dropdown .selected-option:hover {
+  border-color: blue;
+}
+.custom-dropdown .arrow {
+  float: right;
+  border: solid #000;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  transition: transform 0.3s;
+}
+.custom-dropdown .arrow.open {
+  transform: rotate(-135deg);
+}
+.custom-dropdown .options {
+  display: none;
+  position: absolute;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+  z-index: 1000;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.custom-dropdown .options.show {
+  display: block;
+}
+.custom-dropdown .options .option {
+  padding: 10px;
+  cursor: pointer;
+}
+.custom-dropdown .options .option:hover {
+  background: red;
+  color: white;
+}
+
+.One {
   display: flex;
-  flex-wrap: nowrap;
-  margin-left: 90px;
-  margin-top: 20px;
   justify-content: space-between;
 }
 
-.filter {
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-family: "poppins";
-  font-size: 14px;
-  background-color: white;
-  color: #333;
-  margin: 10px 0;
-  width: 260px;
-  height: 45px;
-}
-
-.taxo {
+.tax {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-
-#format {
+.tax #format {
   margin-left: 60px;
-  font-family: "poppins";
+  font-family: "Poppins";
 }
-
-#orderby {
+.tax #orderby {
   margin-right: 87px;
-  font-family: "poppins";
+  font-family: "Poppins";
 }
 
 #load-more {
@@ -126,6 +166,24 @@ body {
   height: 100vh;
 }
 
+.selection {
+  gap: 20px;
+  display: flex;
+  flex-wrap: nowrap;
+  margin-left: 90px;
+  margin-top: 20px;
+}
+
+.titre {
+  margin-left: 220px;
+  margin-top: 450px;
+}
+
+div#orderby-filter {
+  margin-right: 85px;
+  padding-top: 20px;
+}
+
 /*HEDAER*/
 .header {
   position: relative;
@@ -163,9 +221,8 @@ body {
 }
 
 .logo {
-  width: 216px;
   height: 14px;
-  padding-top: 30px;
+  margin-top: -220px;
   margin-left: 100px;
 }
 
@@ -202,15 +259,14 @@ main {
   left: 0;
   z-index: 10020;
 }
-
-.popup-background {
+.popup .popup-background {
   position: relative;
   background: white;
   padding: 30px;
   animation: fade-in-up 0.7s;
 }
-
-.popup-btn, .popup-background .wpcf7-submit {
+.popup .popup-background .popup-btn,
+.popup .popup-background .wpcf7-submit {
   display: inline-block;
   background-color: #d8d8d8;
   font-family: "Poppins" !important;
@@ -221,8 +277,7 @@ main {
   border-radius: 6px;
   transition: all 0.4s ease;
 }
-
-.popup-close {
+.popup .popup-background .popup-close {
   position: absolute;
   top: -5px;
   right: -5px;
@@ -237,8 +292,7 @@ main {
   align-items: center;
   transition: all 0.4s ease;
 }
-
-.popup-close:hover {
+.popup .popup-background .popup-close:hover {
   transform: rotate(180deg);
 }
 
@@ -277,11 +331,45 @@ main {
   overflow: hidden;
 }
 
+.photo {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+}
+.photo .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.495);
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  z-index: 10;
+}
+.photo .overlay .overlay-content {
+  text-align: center;
+}
+.photo .overlay .overlay-content .eye {
+  background: none;
+  margin-bottom: 10px;
+  border: none;
+  font-size: 40px;
+}
+.photo:hover .overlay {
+  opacity: 1;
+}
+
 .ref {
   position: absolute;
   bottom: 10px;
   left: 10px;
-  font-family: "poppins";
+  font-family: "Poppins";
   text-transform: uppercase;
   font-size: 14px;
 }
@@ -290,7 +378,7 @@ main {
   position: absolute;
   bottom: 10px;
   right: 10px;
-  font-family: "poppins";
+  font-family: "Poppins";
   text-transform: uppercase;
   font-size: 14px;
 }
@@ -307,44 +395,6 @@ main {
   padding: 5px;
 }
 
-.photo {
-  position: relative;
-  display: inline-block;
-  margin: 10px;
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.495);
-  opacity: 0;
-  transition: opacity 0.3s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  color: white;
-  z-index: 10;
-}
-
-.photo:hover .overlay {
-  opacity: 1;
-}
-
-.overlay-content {
-  text-align: center;
-}
-
-.eye {
-  background: none;
-  margin-bottom: 10px;
-  border: none;
-  font-size: 40px;
-}
-
 .lightbox {
   position: fixed;
   top: 0;
@@ -359,9 +409,8 @@ main {
   justify-content: center;
   align-items: center;
 }
-
-.lightbox_prev,
-.lightbox_next {
+.lightbox .lightbox_prev,
+.lightbox .lightbox_next {
   border: none;
   width: 50px;
   height: 100px;
@@ -376,27 +425,23 @@ main {
   cursor: pointer;
   transition: opacity 0.3s;
 }
-
-.lightbox_prev:hover,
-.lightbox_next:hover {
+.lightbox .lightbox_prev:hover,
+.lightbox .lightbox_next:hover {
   opacity: 1;
 }
-
-.lightbox_prev {
+.lightbox .lightbox_prev {
   left: 250px;
 }
-
-.lightbox_next {
+.lightbox .lightbox_next {
   right: 250px;
 }
-
-.lightbox_close {
+.lightbox .lightbox_close {
   width: 40px;
   height: 40px;
   border: none;
   position: fixed;
   top: 20px;
-  right: 20px;
+  right: 50px;
   z-index: 10002;
   opacity: 0.5;
   cursor: pointer;
@@ -405,41 +450,35 @@ main {
   color: white;
   background: transparent;
 }
-
-.lightbox_close:hover {
+.lightbox .lightbox_close:hover {
   opacity: 1;
 }
-
-.cat {
+.lightbox .cat {
   position: absolute;
   bottom: 10px;
   right: 10px;
   font-size: 14px;
 }
-
-.ref {
+.lightbox .ref {
   position: absolute;
   bottom: 10px;
   left: 10px;
   font-size: 14px;
 }
-
-#lightbox-category,
-#lightbox-reference {
-  font-family: "poppins";
+.lightbox #lightbox-category,
+.lightbox #lightbox-reference {
+  font-family: "Poppins";
   text-transform: uppercase;
   font-size: 14px;
 }
-
-.image-container {
+.lightbox .image-container {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 760px;
 }
-
-.middle-image {
+.lightbox .image-container .middle-image {
   max-width: 100%;
   max-height: 80%;
   margin: auto;
@@ -452,28 +491,25 @@ main {
   position: relative;
   overflow: hidden;
 }
-
-.overlay-lightbox {
+.lightbox .image-container .overlay-lightbox {
   position: absolute;
-  top: 0;
+  margin-top: 50px;
   left: 0;
   width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  height: 650px;
+  background-color: rgba(0, 0, 0, 0);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   color: white;
 }
-
-.info-photo {
+.lightbox .image-container .overlay-lightbox .info-photo {
   color: white;
   text-align: center;
   margin-top: 20px;
 }
-
-.hidden {
+.lightbox .hidden {
   display: none;
 }
 
@@ -604,20 +640,14 @@ main {
 
 /* Styles pour le bouton hamburger */
 .menu-toggle {
-  position: relative;
-  width: 30px;
-  height: 22px;
-  display: flex;
+  position: absolute;
+  display: none;
   flex-direction: column;
-  justify-content: space-between;
   background: none;
   border: none;
-  cursor: pointer;
-  z-index: 1001;
   top: 0;
-  right: -300px;
+  right: 20px;
 }
-
 .menu-toggle span {
   display: block;
   width: 100%;
@@ -625,60 +655,44 @@ main {
   background-color: #333;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
-
-/* État actif du bouton (transformé en X) */
 .menu-toggle.active span:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
 }
-
 .menu-toggle.active span:nth-child(2) {
   opacity: 0;
 }
-
 .menu-toggle.active span:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Styles pour le menu mobile */
 .mobile-menu {
-  display: flex;
+  display: none;
   position: fixed;
   width: 100%;
   height: 100vh;
   background-color: red; /* Fond rouge */
-  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
-
 .mobile-menu.active {
   display: flex;
-  height: 100vh;
-  width: 100%;
 }
-
-.mobile-nav-menu {
+.mobile-menu .mobile-nav-menu {
   list-style: none;
   padding: 0;
   margin: 0;
   text-align: start;
   flex-direction: column;
 }
-
-.mobile-nav-menu li {
+.mobile-menu .mobile-nav-menu li {
   margin: 10px 0;
 }
-
-.mobile-nav-menu a {
+.mobile-menu .mobile-nav-menu a {
   color: #fff;
   text-decoration: none;
   font-size: 24px;
-}
-
-.menu-toggle {
-  display: none;
 }
 
 @media screen and (max-width: 765px) {
@@ -690,4 +704,31 @@ main {
     display: none;
     overflow: hidden;
   }
+}
+.footer {
+  width: 100%;
+  height: 40px;
+  border-top: solid 1px black;
+}
+
+.footerform {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+}
+
+.footerbar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-right: 50px;
+  list-style: none;
+  text-decoration: none;
+  font-size: 16px;
+  gap: 4em;
+  color: black;
+}
+
+.footer-menu {
+  color: black;
 }/*# sourceMappingURL=style.css.map */

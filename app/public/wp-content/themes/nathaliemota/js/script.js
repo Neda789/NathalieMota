@@ -55,7 +55,9 @@ jQuery(document).ready(function ($) {
         },
     );
 });
-//**hamburger */
+
+
+//**HAMBOURGER */
 
 document.addEventListener('DOMContentLoaded', function() {
     const menuToggle = document.querySelector('.menu-toggle');
@@ -65,10 +67,9 @@ document.addEventListener('DOMContentLoaded', function() {
         menuToggle.classList.toggle('active');
         mobileMenu.classList.toggle('active');
 
-        // Change aria-expanded state
+        // Change aria-expanded
         const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
         menuToggle.setAttribute('aria-expanded', !expanded);
     });
 });
-
 

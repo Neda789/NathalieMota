@@ -18,6 +18,16 @@ function nathaliemota_setup() {
 }
 add_action('after_setup_theme', 'nathaliemota_setup');
 
+function register_my_menus() {
+    register_nav_menus(
+        array(
+            'footer' => __('footer-menu')
+        )
+    );
+}
+add_action('init', 'register_my_menus');
+
+
 // Enqueue styles
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 function theme_enqueue_styles() {
@@ -97,4 +107,3 @@ add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
 // Réutilisation de la même fonction pour filtrer les photos
 add_action('wp_ajax_filter_photos', 'load_more_photos');
 add_action('wp_ajax_nopriv_filter_photos', 'load_more_photos');
-

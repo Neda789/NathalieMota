@@ -12,18 +12,29 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentIndex = 0;
 
     function getImages() {
-        return Array.from(document.querySelectorAll('.photo')).map(photo => ({
-            src: photo.getAttribute('data-href'),
-            category: photo.getAttribute('data-category'),
-            reference: photo.getAttribute('data-reference')
-        }));
+        return Array.from(document.querySelectorAll('.photo')).map(photo => {
+            const src = photo.getAttribute('data-href');
+            const category = photo.getAttribute('data-category');
+            const reference = photo.getAttribute('data-reference');
+            // Ne retourner l'image que si elle a tous les attributs requis
+            if (src && category && reference) {
+                return { src, category, reference };
+            } else {
+                console.warn('Image with missing attributes found:', photo);
+                return null;
+            }
+        }).filter(image => image !== null); // Filtrer les images nulles
     }
 
     function openLightbox(index) {
         console.log('Opening lightbox for index:', index);
         const images = getImages();
         if (images.length === 0) {
-            console.error('No images found');
+            console.error('No valid images found');
+            return;
+        }
+        if (index < 0 || index >= images.length) {
+            console.error('Index out of bounds:', index);
             return;
         }
         currentIndex = index;
@@ -32,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         lightboxCategory.textContent = `Catégorie: ${category}`;
         lightboxReference.textContent = `Référence: ${reference}`;
         lightbox.style.display = 'flex';
-        overlayLightbox.style.display = 'flex'; // Afficher l'overlay
+        overlayLightbox.style.display = 'flex';
     }
 
     function closeLightbox() {

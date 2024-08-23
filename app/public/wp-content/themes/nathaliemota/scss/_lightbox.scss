@@ -4,135 +4,136 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8); 
-  z-index: 10000; 
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 10000;
   overflow: auto;
   animation: lightboxIn 0.5s;
-  display: none; 
-  justify-content: center;  
-  align-items: center;  
-}
-
-.lightbox_prev,
-.lightbox_next {
-  border: none;
-  width: 50px;
-  height: 100px;
-  position: fixed;
-  top: 50%;
-  margin-top: -50px;
-  z-index: 10001;
-  font-size: 40px;
-  color: white;
-  background: transparent;
-  opacity: 0.5;
-  cursor: pointer;
-  transition: opacity 0.3s;
-}
-
-.lightbox_prev:hover,
-.lightbox_next:hover {
-  opacity: 1;
-}
-
-.lightbox_prev {
-  left: 250px;
-}
-
-.lightbox_next {
-  right: 250px;
-}
-
-.lightbox_close {
-  width: 40px;
-  height: 40px;
-  border: none;
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 10002;
-  opacity: 0.5;
-  cursor: pointer;
-  transition: opacity 0.3s;
-  font-size: 50px;
-  color: white;
-  background: transparent;
-}
-
-.lightbox_close:hover {
-  opacity: 1;
-}
-
-.cat {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  font-size: 14px;
-}
-
-.ref {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  font-size: 14px;
-}
-
-#lightbox-category,
-#lightbox-reference{
-  font-family: 'poppins';
-  text-transform: uppercase;
-  font-size: 14px;
-}
-
-.image-container {
-
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height:760px;
-}
-
-.middle-image {
-  max-width: 100%;
-  max-height: 80%;
-  margin: auto;
-  display: block;
-  height: 600px;
-  width: 600px;
-  object-fit: cover;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.overlay-lightbox {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  color: white;
-}
-
-.info-photo {
-  color: white;
-  text-align: center;
-  margin-top: 20px;
-}
-
-
-.hidden {
   display: none;
+  justify-content: center;
+  align-items: center;
+
+  .lightbox_prev,
+  .lightbox_next {
+      border: none;
+      width: 50px;
+      height: 100px;
+      position: fixed;
+      top: 50%;
+      margin-top: -50px;
+      z-index: 10001;
+      font-size: 40px;
+      color: white;
+      background: transparent;
+      opacity: 0.5;
+      cursor: pointer;
+      transition: opacity 0.3s;
+
+      &:hover {
+          opacity: 1;
+      }
+  }
+
+  .lightbox_prev {
+      left: 250px;
+  }
+
+  .lightbox_next {
+      right: 250px;
+  }
+
+  .lightbox_close {
+      width: 40px;
+      height: 40px;
+      border: none;
+      position: fixed;
+      top: 20px;
+      right: 50px;
+      z-index: 10002;
+      opacity: 0.5;
+      cursor: pointer;
+      transition: opacity 0.3s;
+      font-size: 50px;
+      color: white;
+      background: transparent;
+
+      &:hover {
+          opacity: 1;
+      }
+  }
+
+  .cat {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      font-size: 14px;
+  }
+
+  .ref {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      font-size: 14px;
+  }
+
+  #lightbox-category,
+  #lightbox-reference {
+      font-family: 'Poppins';
+      text-transform: uppercase;
+      font-size: 14px;
+  }
+
+  .image-container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 760px;
+
+      .middle-image {
+          max-width: 100%;
+          max-height: 80%;
+          margin: auto;
+          display: block;
+          height: 600px;
+          width: 600px;
+          object-fit: cover;
+          background-size: cover;
+          background-position: center;
+          position: relative;
+          overflow: hidden;
+      }
+
+      .overlay-lightbox {
+          position: absolute;
+          margin-top: 50px;
+          left: 0;
+          width: 100%;
+          height: 650px;
+          background-color: rgba(0, 0, 0, 0.0);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          color: white;
+
+          .info-photo {
+              color: white;
+              text-align: center;
+              margin-top: 20px;
+          }
+      }
+  }
+
+  .hidden {
+      display: none;
+  }
 }
 
 @keyframes lightboxIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
 }
